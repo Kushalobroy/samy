@@ -1,0 +1,198 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background: url('assets/bg.jpg') no-repeat center center fixed;
+  background-size: cover;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  color: white;
+  overflow: hidden;
+}
+audio {
+  display: none;
+}
+
+/* Entry Page */
+.entry {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.7);
+  text-align: center;
+}
+.entry h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+.entry button {
+margin-top: 10px;
+  padding: 15px 30px;
+  font-size: 1.5rem;
+  background: #ff69b4;
+  border: none;
+  border-radius: 30px;
+  color: white;
+  cursor: pointer;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Book Centering Fix */
+.book-container {
+  display: none;
+  height: 100vh;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  perspective: 2000px;
+  position: relative;
+}
+.book-wrapper {
+  width: 800px; /* 300px left + 300px right */
+  height: 500px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.book {
+  width: 400px;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  left: 150px; /* This shifts the flipping point to center book */
+}
+
+/* Page Styling */
+.paper {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transform-style: preserve-3d;
+  transform-origin: left;
+  transition: transform 1s ease-in-out, z-index 1s;
+}
+.front,
+.back {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  border: 2px solid white;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 0 20px #fff4;
+  border-radius: 10px;
+}
+.front p{
+    color: rgb(0, 0, 0);
+    text-align: center;
+    margin-top:100px;
+    font-weight: 900;
+}
+.front {
+  z-index: 2;
+  transform: rotateY(0deg);
+}
+.back {
+  transform: rotateY(180deg);
+}
+
+/* Special Pages */
+.cover-front {
+  background: rgba(255, 182, 193, 0.5);
+}
+.cover-back {
+  background: rgba(253, 252, 252, 0.3);
+}
+.final-message {
+  background-color: rgba(255, 182, 193, 0.3);
+}
+.blank-page {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  border: 2px solid white;
+  border-radius: 10px;
+}
+.blank-page::before {
+  content: "💗";
+  font-size: 10rem;
+  color: rgba(255, 192, 203, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  z-index: 1000;
+}
+
+.controls {
+  position: absolute;
+  bottom: 50px;
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  width: 100%;
+  z-index: 10;
+}
+
+.controls button {
+  font-size: 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: pink;
+  position: relative;
+  animation: pulseBtn 2s infinite;
+  padding: 20px;
+}
+
+/* Heart Icon */
+.controls button::before {
+  content: "❤️";
+  font-size: 2.4rem;
+}
+
+/* Arrows on top of hearts */
+.controls button.prev::after,
+.controls button.next::after {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -70%);
+  font-size: 1.2rem;
+  color: white;
+}
+
+/* Specific content for left and right */
+.controls button.prev::after {
+  content: "←";
+}
+
+.controls button.next::after {
+  content: "→";
+}
+
+/* Heart Canvas */
+canvas#heartCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+
